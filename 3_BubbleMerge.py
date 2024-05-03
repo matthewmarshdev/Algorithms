@@ -1,15 +1,22 @@
-# Create a list of unsorted values
-numbers = [61, 76, 19, 4, 94, 32, 27, 83, 58]
-numbers2 = [1, 3, 4, 56, 54, 344, 1254535, 4456, 7, 2, 45, 46, 47, 48, 87, 36, 61, 76, 19, 4, 94, 32, 27, 83, 58]
 
-#Merge Sort
+import time
+
+numbers = [61, 76, 19, 4, 94, 32, 27, 83, 58]
+numbers2 = [1, 3, 4, 56, 54, 344, 1254535, 4456, 7, 2, 45, 46, 47, 48, 87, 36, 61, 76, 19, 4, 94, 32, 27, 83, 58, 2, 3, 45, 46, 34544, 44564, 34565, 345, 34, 67,57, 68, 69, 60, 12, 11, 14, 38]
+
+# record start time
+startAll = time.time()
+
+#Merge Sort-----
+
+startMerge = time.time()
 def merge(numbers, i, j, k):
-    merged_size = k - i + 1               # Size of merged partition
-    merged_numbers = [0] * merged_size    # Dynamically allocates temporary array
-                                          # for merged numbers
-    merge_pos = 0                         # Position to insert merged number
-    left_pos = i                          # Initialize left partition position
-    right_pos = j + 1                     # Initialize right partition position
+        # record start time
+    merged_size = k - i + 1               
+    merged_numbers = [0] * merged_size   
+    merge_pos = 0                        
+    left_pos = i                      
+    right_pos = j + 1  
    
     # Add smallest element from left or right partition to merged numbers
     while left_pos <= j and right_pos <= k:
@@ -50,11 +57,10 @@ def merge_sort(numbers, i, k):
             
         # Merge left and right partition in sorted order
         merge(numbers, i, j, k)
+        # record end time
+endMerge = time.time()
 
-
-
-
-#BubbleSort
+#BubbleSort------
 
 def bubbleSort(numbers2):
     n = len(numbers2)
@@ -75,21 +81,36 @@ def bubbleSort(numbers2):
         if (swapped == False):
             break
 
-
-# Driver code to test above
 if __name__ == "__main__":
     numbers2 
 
+    # record start time
+    startBubble = time.time()
+
     bubbleSort(numbers2)
 
-    print("SORTED VIA BUBBLE:")
-    for i in range(len(numbers2)):
-        print("%d" % numbers2[i], end=" ")
+    # record end time
+    endBubble = time.time()
+ 
+    print("The time of execution of bubbleSort is :",
+        (endBubble-startBubble) * 10**3, "ms")
 
-# Print unsorted list
+# record end time
+endAll = time.time()
+
+print("The time of execution of mergeSort is :",
+      (endMerge-startMerge) * 10**3, "ms")
+
+print("The time of execution of entire program is :",
+      (endAll-startAll) * 10**3, "ms")
+
+# Print out the unsorted list for future ref.
 print('UNSORTED DATA:', numbers2)
 
-# Initial call to merge_sort
+print("SORTED VIA BUBBLE:")
+for i in range(len(numbers2)):
+    print("%d" % numbers2[i], end=" ")
+
 merge_sort(numbers2, 0, len(numbers2) - 1)
 
 # Print sorted list
