@@ -8,6 +8,7 @@ numbers2 = [1, 3, 4, 56, 54, 344, 1254535, 4456, 7, 2, 45, 46, 47, 48, 87, 36, 6
 startAll = time.time()
 
 #Merge Sort-----
+#cheching version control-------
 
 startMerge = time.time()
 def merge(numbers, i, j, k):
