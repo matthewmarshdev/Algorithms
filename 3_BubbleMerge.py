@@ -1,24 +1,26 @@
 
 import time
 
-numbers = [61, 76, 19, 4, 94, 32, 27, 83, 58]
-numbers2 = [1, 3, 4, 56, 54, 344, 1254535, 4456, 7, 2, 45, 46, 47, 48, 87, 36, 61, 76, 19, 4, 94, 32, 27, 83, 58, 2, 3, 45, 46, 34544, 44564, 34565, 345, 34, 67,57, 68, 69, 60, 12, 11, 14, 38]
+numbers = [1, 3, 4, 56, 54, 344, 1254535, 4456, 7, 2, 45, 46, 47, 48, 87, 
+           36, 61, 76, 19, 4, 94, 32, 27, 83, 58, 2, 3, 45, 46, 34544, 44564, 
+           34565, 345, 34, 67,57, 68, 69, 60, 12, 11, 14, 38]
+numbers2 = [1, 3, 4, 56, 54, 344, 1254535, 4456, 7, 2, 45, 46, 47, 48, 87, 
+            36, 61, 76, 19, 4, 94, 32, 27, 83, 58, 2, 3, 45, 46, 34544, 
+            44564, 34565, 345, 34, 67,57, 68, 69, 60, 12, 11, 14, 38]
 
 # record start time
 startAll = time.time()
 
 #Merge Sort-----
-#cheching version control-------
-
 startMerge = time.time()
 def merge(numbers, i, j, k):
-        # record start time
     merged_size = k - i + 1               
     merged_numbers = [0] * merged_size   
     merge_pos = 0                        
     left_pos = i                      
     right_pos = j + 1  
-   
+
+
     # Add smallest element from left or right partition to merged numbers
     while left_pos <= j and right_pos <= k:
         if numbers[left_pos] <= numbers[right_pos]:
@@ -58,7 +60,7 @@ def merge_sort(numbers, i, k):
             
         # Merge left and right partition in sorted order
         merge(numbers, i, j, k)
-        # record end time
+     
 endMerge = time.time()
 
 #BubbleSort------
@@ -108,6 +110,7 @@ print("The time of execution of entire program is :",
 # Print out the unsorted list for future ref.
 print('UNSORTED DATA:', numbers2)
 
+#print the sorted array via bubble
 print("SORTED VIA BUBBLE:")
 for i in range(len(numbers2)):
     print("%d" % numbers2[i], end=" ")
