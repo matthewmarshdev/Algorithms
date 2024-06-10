@@ -5,24 +5,34 @@ import time
  
 algorithms=['Selection', 'Quick', 'Bubble']
 
+
+
+lowRange = int(input("Enter lowest number for dataset:"))
+highRange = int(input("Enter highest number for dataset:"))
+numberOfIntegers = int(input("Enter the number of integers in the dataset:"))
+
 rand_big_list=[]
-n=1000
+n=numberOfIntegers
 for i in range(n):
-    rand_big_list.append(random.randint(1,1000))
+    rand_big_list.append(random.randint(lowRange,highRange))
 print('Large List, 1000 Integers ', rand_big_list)
  
 rand_small_list=[]
 n=100
 for i in range(n):
-    rand_small_list.append(random.randint(3,9))
-print('Small List, 1000 Integers ',rand_small_list)
+    rand_small_list.append(random.randint(1,50))
+print('Small List, 50 Integers ',rand_small_list)
 
- 
+staticList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+              21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+              40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+              60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
+
 def createList(r1, r2):
     return [item for item in range(r1, r2+1)]
      
 r1, r2 = 1, 1000
-print('Big list, ordered except for first and last value', createList(r1, r2))
+#print('Big list, ordered except for first and last value', createList(r1, r2))
 
 # Selection sort in Python
 #if algorithms == 'Selection':
@@ -41,13 +51,10 @@ def selectionSort(rand_big_list, size):
 
 size = len(rand_big_list)
 selectionSort(rand_big_list, size)
-print('The array after sorting in Ascending Order by selection sort is:')
-print(rand_big_list)
+#print('The array after sorting in Ascending Order by selection sort is:')
+#print(rand_big_list)
 endSelect = time.time()
-
-print("The time of execution of SelectSort is :",
-      (endSelect-startSelect) * 10**3, "ms")
-
+selectTime = (endSelect-startSelect)
 # Optimized Python program for implementation of Bubble Sort
 
 startBubble = time.time()
@@ -70,107 +77,59 @@ def bubbleSort(arr):
         if (swapped == False):
             break
 
-
 # Driver code to test above for Bubble Sort
 if __name__ == "__main__":
     arr = rand_big_list
 
     bubbleSort(arr)
 
-    print("Sorted array using bubble sort:")
-    for i in range(len(arr)):
-        print("%d" % arr[i], end=" ")
+#    print("Sorted array using bubble sort:")
+#    for i in range(len(arr)):
+#        print("%d" % arr[i], end=" ")
 
 endBubble = time.time()
-
-print("The time of execution of Bubble Sort is :",
-      (endBubble-startBubble) * 10**3, "ms")
+bubbleTime = (endBubble-startBubble)
 
 # Python3 implementation of QuickSort
-# Function to find the partition position
-def partition(array, low, high):
+startQuick = time.time()
+def quicksort(x):
+    if len(x) == 1 or len(x) == 0:
+        return x
+    else:
+        pivot = x[0]
+        i = 0
+        for j in range(len(x)-1):
+            if x[j+1] < pivot:
+                x[j+1],x[i+1] = x[i+1], x[j+1]
+                i += 1
+        x[0],x[i] = x[i],x[0]
+        first_part = quicksort(x[:i])
+        second_part = quicksort(x[i+1:])
+        first_part.append(x[i])
+        return first_part + second_part
+        
+alist = rand_small_list
+quicksort(alist)
+#print("quick sort", alist)
+endQuick = time.time()
+quickTime = (endQuick-startQuick)
 
-    # Choose the rightmost element as pivot
-    pivot = array[high]
+print("The time of execution of Selection Sort is :",
+      (selectTime) * 10**3, "ms")
 
-    # Pointer for greater element
-    i = low - 1
+print("The time of execution of Bubble Sort is :",
+      (bubbleTime) * 10**3, "ms")
 
-    # Traverse through all elements
-    # compare each element with pivot
-    for j in range(low, high):
-        if array[j] <= pivot:
+print("The time of execution of QuickSort is :",
+      (quickTime) * 10**3, "ms")
 
-            # If element smaller than pivot is found
-            # swap it with the greater element pointed by i
-            i = i + 1
+print("The time of execution of all methods for this Run is :",
+      (selectTime + quickTime + bubbleTime) * 10**3, "ms")
 
-            # Swapping element at i with element at j
-            (array[i], array[j]) = (array[j], array[i])
-
-    # Swap the pivot element with
-    # the greater element specified by i
-    (array[i + 1], array[high]) = (array[high], array[i + 1])
-
-    # Return the position from where partition is done
-    return i + 1
-
-# Quicksort
-def quicksort(array, low, high):
-    if low < high:
-
-        # Find pivot element such that
-        # element smaller than pivot are on the left
-        # element greater than pivot are on the right
-        pi = partition(array, low, high)
-
-        # Recursive call on the left of pivot
-        quicksort(array, low, pi - 1)
-
-        # Recursive call on the right of pivot
-        quicksort(array, pi + 1, high)
-
-if __name__ == '__main__':
-    array = rand_big_list
-    N = len(array)
-
-    # Function call
-    quicksort(array, 0, N - 1)
-    print('Quick Sorted array:')
-    for x in array:
-        print(x, end=" ")
-
-
-
-
-# This code is modified by Suraj krushna Yadav
-
-
-#instantiate the UI with pop-up, loading input window
-#add help language in the UI
-
-#ask user to input a series of numbers (can be 3 numbers or up to 100000)
-#Click a run method in the UI
-
-#Add list variable from input into method 1 (Selection Sort)
-#output should be a sorted list and time from start to finish
-
-#Add list variable from input into method 1 (Shell Sort)
-#output should be a sorted list and time from start to finish
-
-#Add list variable from input into method 1 (Quick Sort)
-#output should be a sorted list and time from start to finish
-
-#put all 3 method outputs in a table with the following columns:
-#Sort Algorithm Name, Original List, Sorted List, Time to Sort, Time Variable
-
-#Render the Table in the UI
-#Render a new button in the UI: Clear Table
-#Render a new button in the UI: See Logs
-#Render a new button in the UI: Ask GPT?
-
-#If user clicks Clear Table, reset list variable, derender table, wipe API response
-#If user clicks See Logs, open file that shows each iteration performed in each method
-#If user clicks Ask GPT, use OpenAI API to send following Prompt:
-#"What sorting algorithm would be best to use to sort the following list:" + ListVar
-#Display and render response from API 
+if selectTime < (bubbleTime and quickTime):
+    print("Selection Sort:", selectTime, ", was faster than Quick Sort and Bubble Sort for this data set")
+elif bubbleTime < (selectTime and quickTime):
+    print("Bubble Sort with a time of:", bubbleTime, " was faster than Quick Sort and Selection Sort for this data set")
+else:     
+    print("Quick Sort with a time of:", quickTime, " was faster than Quick Sort and Bubble Sort for this data set")
+ 
